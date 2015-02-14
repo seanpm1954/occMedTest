@@ -1,0 +1,20 @@
+<h1>Consortiums</h1>
+<table class="table table-hover" ng-controller="ConsortCtrl">
+    <thead>
+    <tr>
+        <th>Edit</th>
+        <th>Consort ID</th>
+        <th>Consort Name <input ng-model="search.consort_name"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr dir-paginate="con in consorts | filter:search:strict  | itemsPerPage: pageSize">
+        <td><a href="/consorts/{{con.client_id}}">Edit</a> </td>
+        <td>{{con.consort_id}}</td>
+        <td>{{con.consort_name}}</td>
+    </tr>
+    </tbody>
+</table>
+<div ng-controller="PagingController">
+    <dir-pagination-controls  on-page-change="pageChangeHandler(newPageNumber)" ></dir-pagination-controls>
+</div>

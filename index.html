@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Angular Test</title>
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/main.css">
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
+  <script src="lib/angular.min.js"></script>
+  <script src="lib/angular-route.min.js"></script>
+  <script src="lib/angular-animate.min.js"></script>
+  <script src="lib/angular-cookies.js"></script>
+    <script src="lib/dirPagination.js"></script>
+
+  <script src="js/app.js"></script>
+  <script src="js/controllers/login.js"></script>
+  <script src="js/services/authentication.js"></script>
+
+</head>
+
+<body>
+
+<header ng-controller="NavCtrl">
+    <h1>{{header}}</h1>
+</header>
+
+<nav ng-controller="LoginCtrl" ng-show="username"><a ng-click="logout()">Logout: {{username}}</a>
+</nav>
+
+<aside>
+    <div ng-show="username">
+        <ul class="nav nav-pills nav-stacked" ng-controller="NavCtrl">
+        <li ng-class="{ active: isActive('/users') }"><a ng-href="#/users">Users</a></li>
+        <li ng-class="{ active: isActive('/clients') }"><a ng-href="#/clients">Clients</a></li>
+        <li ng-class="{ active: isActive('/personnel') }"><a ng-href="#/personnel">Personnel</a></li>
+        <li ng-class="{ active: isActive('/tests') }"><a ng-href="#/tests">Test</a></li>
+        <li ng-class="{ active: isActive('/consort') }"><a ng-href="#/consort">Consortiums</a></li>
+    </ul>
+    </div>
+</aside>
+
+<article ng-view></article>
+
+<footer ng-controller="NavCtrl">
+    {{footer}}   {{date | date:'yyyy-MM-dd'}}
+</footer>
+
+
+
+
+
+</body>
+</html>

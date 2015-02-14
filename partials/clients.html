@@ -1,0 +1,20 @@
+<h1>Clients</h1>
+<table class="table table-hover" ng-controller="ClientsCtrl">
+    <thead>
+    <tr>
+        <th>Edit</th>
+        <th>Client ID</th>
+        <th>Client Name <input ng-model="search.client_name"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr dir-paginate="client in clients | filter:search:strict  | itemsPerPage: pageSize">
+        <td><a href="/clients/{{client.client_id}}">Edit</a> </td>
+        <td>{{client.client_id}}</td>
+        <td>{{client.client_name}}</td>
+    </tr>
+    </tbody>
+</table>
+<div ng-controller="PagingController">
+    <dir-pagination-controls  on-page-change="pageChangeHandler(newPageNumber)" ></dir-pagination-controls>
+</div>

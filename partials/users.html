@@ -1,0 +1,26 @@
+<h2>Users</h2>
+<table class="table table-hover" ng-controller="UsersCtrl">
+    <thead>
+    <tr>
+        <th>Edit</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>First Name</th>
+        <th>Last Name <input ng-model="search.last_name"></th>
+        <th>E-Mail</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr dir-paginate="user in users | filter:search  | itemsPerPage: pageSize">
+        <td><a href="/users/{{user.userID}}">Edit</a> </td>
+        <td>{{user.username}}</td>
+        <td>{{user.password}}</td>
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.email}}</td>
+    </tr>
+    </tbody>
+</table>
+<div ng-controller="PagingController">
+    <dir-pagination-controls  on-page-change="pageChangeHandler(newPageNumber)" ></dir-pagination-controls>
+</div>
