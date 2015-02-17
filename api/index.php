@@ -102,7 +102,7 @@ function getConsorts() {
 }
 
 function getTests() {
-    $sql = "SELECT * FROM test";
+    $sql = "SELECT * FROM test ORDER BY test_name ASC";
     try {
         $db = getConnection();
         $stmt = $db->query($sql);

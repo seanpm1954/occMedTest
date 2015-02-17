@@ -1,7 +1,8 @@
 var myApp = angular.module('myApp',[
     'ngRoute',
     'ngCookies',
-    'angularUtils.directives.dirPagination'
+    'angularUtils.directives.dirPagination',
+    'ang-drag-drop'
 ]);
 
 
@@ -30,6 +31,10 @@ myApp.config(['$routeProvider', function($routeProvider){
        .when('/tests',{
            templateUrl: 'partials/tests.html',
            controller: 'TestsCtrl'
+       })
+       .when('/testLayout',{
+           templateUrl: 'partials/testLayout.html',
+           controller: 'TestLayoutCtrl'
        })
        .when('/error',{
            templateUrl: 'partials/error.html'
@@ -85,8 +90,10 @@ myApp.controller('ClientsCtrl', function($scope, $http, $location){
 });// end clients ctrl
 
 myApp.controller('TestsCtrl', function($scope, $http, $location){
+
     $scope.currentPage = 1;
     $scope.pageSize = 23;
+
     $http.get('api/tests').success(function(data) {
         $scope.tests = data;
     });
@@ -94,8 +101,33 @@ myApp.controller('TestsCtrl', function($scope, $http, $location){
         $location.path('/tests');
     }
 
-
 });// end tests ctrl
+
+myApp.controller('TestLayoutCtrl', function($scope, $http, $location){
+
+    $scope.selectedTest = [
+        {test_id:"-1"},
+        {test_name:"Drop Test Below"}
+    ];
+
+
+    $http.get('api/tests').success(function(data) {
+        $scope.tests = data;
+    });
+
+    $scope.dropSuccessHandler = function($event,index,array){
+
+        if(index != 1){array.splice(index,1);}
+
+    };
+
+    $scope.onDrop = function($event,$data,array){
+       if($data.test_name !="Drop Test Below"){array.push($data);}
+    };
+
+
+});//  end test layout crl
+
 
 myApp.controller('ConsortCtrl', function($scope, $http, $location){
     $scope.currentPage = 1;

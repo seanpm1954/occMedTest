@@ -96,7 +96,16 @@ article{
     overflow: scroll;
 }
 
+#selectedTest{
+    background: lightblue ;
+    color: #ffffff;
+    min-height: 50px;
+    font-size: 1.5em;
+}
 
+#selectedTest:first-of-type li{
+    color: #000000;
+}
 
 footer{
     background: #225378;

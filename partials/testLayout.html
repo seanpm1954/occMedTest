@@ -1,0 +1,26 @@
+<div class="row" ng-controller="TestsCtrl">
+    <div class="col-xs-6" id="selectedTest">
+        <ul>
+            <li ui-draggable="true" drag="sTest"
+
+                on-drop-success="dropSuccessHandler($event,$index,selectedTest)"
+                ui-on-Drop="onDrop($event,$data,selectedTest)"
+
+                ng-repeat="sTest in selectedTest track by $index">
+                {{sTest.test_name}}
+            </li>
+        </ul>
+    </div>
+    <div class="col-xs-6">
+        <ul>
+            <li ui-draggable="true" drag="test"
+
+                ui-on-Drop="onDrop($event,$data,tests)"
+
+                on-drop-success="dropSuccessHandler($event,$index,tests)"
+                ng-repeat="test in tests track by $index">
+                {{test.test_name}}
+            </li>
+        </ul>
+    </div>
+</div>
