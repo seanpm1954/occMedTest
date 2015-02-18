@@ -1,7 +1,8 @@
 <div class="row" ng-controller="TestsCtrl">
-    <div class="col-xs-6" id="selectedTest">
-        <ul class="sTest">
-            <li ui-draggable="true" drag="sTest"
+    <div class="col-xs-6" >
+        <ul id="TestSelected" >
+            <li class="list-group-item"
+                ui-draggable="true" drag="sTest"
                 on-drop-success="dropSuccessHandler($event,$index,selectedTest)"
                 ui-on-Drop="onDrop($event,$data,selectedTest)"
                 ng-repeat="sTest in selectedTest track by $index">

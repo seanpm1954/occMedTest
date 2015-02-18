@@ -96,11 +96,19 @@ article{
     overflow: scroll;
 }
 
-#selectedTest{
+#TestSelected{
     background: lightblue ;
     color: #ffffff;
     min-height: 50px;
     font-size: 1.5em;
+}
+
+li.list-group-item{
+    color: #000000;
+}
+
+li:first-child{
+    color:red;
 }
 
 footer{
