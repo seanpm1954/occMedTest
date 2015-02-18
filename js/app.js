@@ -127,7 +127,17 @@ myApp.controller('TestLayoutCtrl', function($scope, $http, $location){
     };
 
     $scope.onDrop = function($event,$data,array){
-       if($data.test_name !="Drop Test Below"){array.push($data);}
+       if($data.test_name !="Drop Test Below"){
+           array.push($data);
+       }
+
+        $scope.saveTest = function(array){
+            for(i=2; i<array.length; i++){
+                console.log(array[i].test_id + " " + array[i].test_name);
+            }
+        }
+
+
     };
 
     $scope.dropSuccessHandler1 = function($event,index,array){
