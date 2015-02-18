@@ -125,6 +125,13 @@ myApp.controller('TestLayoutCtrl', function($scope, $http, $location){
        if($data.test_name !="Drop Test Below"){array.push($data);}
     };
 
+    $scope.saveTest = function(array){
+        for(i = 2; i < array.length; i++){
+            console.log(array[i].test_name);
+        }
+
+    }
+
 
 });//  end test layout crl
 

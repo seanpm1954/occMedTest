@@ -103,21 +103,6 @@ article{
     font-size: 1.5em;
 }
 
-<<<<<<< HEAD
-li.list-group-item{
-    color: #000000;
-}
-
-li:first-child{
-    color:red;
-}
-
-=======
-#selectedTest:first-of-type li{
-    color: #000000;
-}
-
->>>>>>> parent of 79b6bf9... css cleanup
 footer{
     background: #225378;
     line-height: 3em;
