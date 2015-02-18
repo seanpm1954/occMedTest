@@ -1,10 +1,18 @@
 <div class="row" ng-controller="TestsCtrl">
+<<<<<<< HEAD
     <div class="col-xs-6" >
         <ul id="TestSelected" >
             <li class="list-group-item"
                 ui-draggable="true" drag="sTest"
+=======
+    <div class="col-xs-6" id="selectedTest">
+        <ul>
+            <li ui-draggable="true" drag="sTest"
+
+>>>>>>> parent of 79b6bf9... css cleanup
                 on-drop-success="dropSuccessHandler($event,$index,selectedTest)"
                 ui-on-Drop="onDrop($event,$data,selectedTest)"
+
                 ng-repeat="sTest in selectedTest track by $index">
                 {{sTest.test_name}}
             </li>
@@ -13,7 +21,9 @@
     <div class="col-xs-6">
         <ul>
             <li ui-draggable="true" drag="test"
+
                 ui-on-Drop="onDrop($event,$data,tests)"
+
                 on-drop-success="dropSuccessHandler($event,$index,tests)"
                 ng-repeat="test in tests track by $index">
                 {{test.test_name}}
