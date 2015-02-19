@@ -104,61 +104,65 @@ myApp.controller('TestsCtrl', function($scope, $http, $location){
 });// end tests ctrl
 
 myApp.controller('TestLayoutCtrl', function($scope, $http, $location){
-
-    $scope.selectedTest = [
-        {test_id:"-1"},
-        {test_name:"Drop Test Below"}
+    $scope.tConsorts = [
+        {consort_id:""},
+        {consort_name:""},
     ];
-
-    $scope.selectedTest1 = [
-        {test_id:"-1"},
-        {test_name:"Drop Test Below#1"}
-    ];
-
-
     $http.get('api/tests').success(function(data) {
         $scope.tests = data;
     });
 
+    $http.get('api/consorts').success(function(data) {
+        $scope.consorts = data;
+        //console.log($scope.consorts.length);
+        for(i=0; i<$scope.consorts.length; i++){
+            $scope.tConsorts[i].consort_name = $scope.consorts[i].consort_name;
+            $scope.tConsorts[i].consort_id = $scope.consorts[i].consort_id;
+            $scope.selectedTest = [
+                {test_id:$scope.tConsorts[0].consort_id},
+                {test_name:$scope.tConsorts[0].consort_name}
+            ];
+            $scope.selectedTest1 = [
+                {test_id:$scope.tConsorts[1].consort_id},
+                {test_name:$scope.tConsorts[1].consort_name}
+            ];
+        };
+    });
+
+
+
+
     $scope.dropSuccessHandler = function($event,index,array){
-
-        if(index != 1){array.splice(index,1);}
-
-    };
-
-    $scope.onDrop = function($event,$data,array){
-       if($data.test_name !="Drop Test Below"){
-           array.push($data);
-       }
-
-        $scope.saveTest = function(array){
-            for(i=2; i<array.length; i++){
-                console.log(array[i].test_id + " " + array[i].test_name);
-            }
+        //index=1 = header
+        if(index != 1){
+            array.splice(index,1);
         }
-
-
     };
 
     $scope.dropSuccessHandler1 = function($event,index,array){
+        //index=1 = header
+        if(index != 1){
+            array.splice(index,1);
+        }
+    };
 
-        if(index != 1){array.splice(index,1);}
-
+    $scope.onDrop = function($event,$data,array){
+           array.push($data);
     };
 
     $scope.onDrop1 = function($event,$data,array){
-        if($data.test_name !="Drop Test Below#1"){array.push($data);}
+       array.push($data);
     };
 
     $scope.saveTest = function(array, array1){
         // each array represents a test section
-        // i=2 to skip header
+        // i=2 to skip consortium
         for(i = 2; i < array.length; i++){
-            console.log(array[i].test_name);
+            console.log(array[i].test_name + " " + array[i].test_id);
         }
-        console.log('second');
+
         for(i = 2; i < array1.length; i++){
-            console.log(array1[i].test_name);
+            console.log(array1[i].test_name + " " + array1[i].test_id);
         }
 
     }
