@@ -101,36 +101,31 @@ myApp.controller('TestsCtrl', function($scope, $http, $location){
         $location.path('/tests');
     }
 
-});// end tests ctrl
+});// end tests ctrl;
 
 myApp.controller('TestLayoutCtrl', function($scope, $http, $location){
-    $scope.tConsorts = [
-        {consort_id:""},
-        {consort_name:""},
-    ];
+
+    //get consorts used by client - returning all now....
+
     $http.get('api/tests').success(function(data) {
         $scope.tests = data;
     });
 
     $http.get('api/consorts').success(function(data) {
-        $scope.consorts = data;
-        //console.log($scope.consorts.length);
-        for(i=0; i<$scope.consorts.length; i++){
-            $scope.tConsorts[i].consort_name = $scope.consorts[i].consort_name;
-            $scope.tConsorts[i].consort_id = $scope.consorts[i].consort_id;
-            $scope.selectedTest = [
+        $scope.tConsorts = data;
+
+        for(i = 0; i < $scope.tConsorts.length; i++){
+            $scope.selectedTest = [ //dropZone for consort
                 {test_id:$scope.tConsorts[0].consort_id},
                 {test_name:$scope.tConsorts[0].consort_name}
             ];
-            $scope.selectedTest1 = [
+
+            $scope.selectedTest1 = [ //dropZone for consort
                 {test_id:$scope.tConsorts[1].consort_id},
                 {test_name:$scope.tConsorts[1].consort_name}
             ];
         };
     });
-
-
-
 
     $scope.dropSuccessHandler = function($event,index,array){
         //index=1 = header
@@ -139,35 +134,23 @@ myApp.controller('TestLayoutCtrl', function($scope, $http, $location){
         }
     };
 
-    $scope.dropSuccessHandler1 = function($event,index,array){
-        //index=1 = header
-        if(index != 1){
-            array.splice(index,1);
-        }
-    };
-
     $scope.onDrop = function($event,$data,array){
-           array.push($data);
-    };
-
-    $scope.onDrop1 = function($event,$data,array){
-       array.push($data);
+        array.push($data);
     };
 
     $scope.saveTest = function(array, array1){
         // each array represents a test section
-        // i=2 to skip consortium
+        // i=2 to skip consortium and first id
         for(i = 2; i < array.length; i++){
+            console.log(array[1].test_name + " " + array[0].test_id);//consort
             console.log(array[i].test_name + " " + array[i].test_id);
         }
 
         for(i = 2; i < array1.length; i++){
+            console.log(array1[1].test_name + " " + array1[0].test_id);//consort
             console.log(array1[i].test_name + " " + array1[i].test_id);
         }
-
     }
-
-
 });//  end test layout crl
 
 

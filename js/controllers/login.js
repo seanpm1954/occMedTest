@@ -1,6 +1,8 @@
 myApp.controller('LoginCtrl', function($scope, $rootScope, $location, $cookieStore, AuthService){
-    //$scope.$on('$viewContentLoaded', function(){
-    //});
+
+    if($cookieStore.get('username')){
+        $location.path('/users');
+    }
 
     $scope.login = function(){
         AuthService.login($scope.user).

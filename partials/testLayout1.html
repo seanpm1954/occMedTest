@@ -11,8 +11,8 @@
         </br>
         <ul id="TestSelected">
             <li ui-draggable="true" drag="sTest1"
-                on-drop-success="dropSuccessHandler($event,$index,selectedTest1)"
-                ui-on-Drop="onDrop($event,$data,selectedTest1)"
+                on-drop-success="dropSuccessHandler1($event,$index,selectedTest1)"
+                ui-on-Drop="onDrop1($event,$data,selectedTest1)"
                 ng-repeat="sTest1 in selectedTest1 track by $index">
                 {{sTest1.test_name}}
             </li>
