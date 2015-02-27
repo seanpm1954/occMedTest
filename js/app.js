@@ -75,6 +75,9 @@ myApp.controller('UsersCtrl', function($scope, $http, $location, createEditSvc, 
     $http.get('api/clients').success(function(data) {
         $scope.clients = data;
     });
+    $http.get('api/access').success(function(data) {
+        $scope.access = data;
+    });
     /////
 
     ///  modal to add user
@@ -88,28 +91,40 @@ myApp.controller('UsersCtrl', function($scope, $http, $location, createEditSvc, 
             resolve: {
                 clients: function () {
                     return $scope.clients;
+                },
+                access: function () {
+                    return $scope.access;
+                },
+                user: function () {
+                    return $scope.user;
                 }
+
             }
         });
 
         modalInstance.result.then(function (selectedItem) {
             $scope.selected = selectedItem;
-            // save to user
-            // $scope.selected.clients.client_id
         });
     };
 
 });// end users ctrl
 
-myApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, clients) {
+myApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, clients, access, user) {
 
     $scope.clients = clients;
+    $scope.access = access;
+    $scope.user = user;
     $scope.selected = {
-        clients: $scope.clients[0]
+        clients: $scope.clients[0],
+        access: $scope.access[0]
     };
 
     $scope.ok = function () {
-        $modalInstance.close($scope.selected.clients);
+    // save to user
+        // $scope.selected.clients.client_id $scope.selected.access.access_id
+        //$scope.selected.username $scope.selected.firstname $scope.selected.lastname
+        console.log("clientID: " + $scope.selected.clients.client_id + " accessID: " + $scope.selected.access.access_id + " userID: " + $scope.selected.username + " first: " + $scope.selected.firstname + " last: " + $scope.selected.lastname);
+        $modalInstance.close();
     };
 
     $scope.cancel = function () {

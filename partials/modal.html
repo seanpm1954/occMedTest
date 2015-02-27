@@ -1,10 +1,23 @@
 <div ng-controller="UsersCtrl">
         <div class="modal-header">
-            <h3 class="modal-title">I'm a modal!</h3>
+            <h3 class="modal-title">Add new user</h3>
         </div>
         <div class="modal-body">
+            <label>First name</label>
+            <input type="text" ng-model="selected.firstname" />
+            <div>
+                <label>Last name</label>
+                <input type="text" ng-model="selected.lastname" />
+                <div>
+            <label>User name</label>
+            <input type="text" ng-model="selected.username" />
             <div>
                 <select ng-model="selected.clients" ng-options="client.client_name for client in clients track by client.client_id">
+                </select>
+            </div>
+
+            <div>
+                <select ng-model="selected.access" ng-options="acc.access_name for acc in access track by acc.access_id">
                 </select>
             </div>
             </div>

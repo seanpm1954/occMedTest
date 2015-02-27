@@ -12,6 +12,7 @@ $app->get('/clients', 'getClients');
 $app->get('/personnel', 'getPersonnel');
 $app->get('/consorts', 'getConsorts');
 $app->get('/tests', 'getTests');
+$app->get('/access', 'getAccess');
 
 
 $app->get('/issues/:issueID', 'getOneIssues');
@@ -128,6 +129,18 @@ function getPersonnel() {
     }
 }
 
+function getAccess() {
+    $sql = "SELECT * FROM access";
+    try {
+        $db = getConnection();
+        $stmt = $db->query($sql);
+        $access = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = null;
+        echo json_encode($access);
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
 
 
 function getOneIssues($id) {
