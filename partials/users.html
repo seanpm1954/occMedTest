@@ -1,4 +1,8 @@
-<h2>Users</h2>
+<h2 style="text-align: center">Users</h2>
+<button type="button" class="btn btn-link" id="addItem" ng-click="open()">
+    <span class="glyphicon glyphicon-plus"></span>
+    Add User
+</button>
 <table class="table table-hover" ng-controller="UsersCtrl">
     <thead>
     <tr>
@@ -12,7 +16,7 @@
     </thead>
     <tbody>
     <tr dir-paginate="user in users | filter:search  | itemsPerPage: pageSize">
-        <td><a href="/users/{{user.userID}}">Edit</a> </td>
+        <td><a href="/users/{{user.userID}}"><span class="glyphicon glyphicon-pencil"></span></a> </td>
         <td>{{user.username}}</td>
         <td>{{user.password}}</td>
         <td>{{user.first_name}}</td>
@@ -21,6 +25,8 @@
     </tr>
     </tbody>
 </table>
+
 <div ng-controller="PagingController">
     <dir-pagination-controls  on-page-change="pageChangeHandler(newPageNumber)" ></dir-pagination-controls>
 </div>
+

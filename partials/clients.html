@@ -9,7 +9,7 @@
     </thead>
     <tbody>
     <tr dir-paginate="client in clients | filter:search:strict  | itemsPerPage: pageSize">
-        <td><a href="/clients/{{client.client_id}}">Edit</a> </td>
+        <td><a href="/clients/{{client.client_id}}"><span class="glyphicon glyphicon-pencil"></span></a> </td>
         <td>{{client.client_id}}</td>
         <td>{{client.client_name}}</td>
     </tr>

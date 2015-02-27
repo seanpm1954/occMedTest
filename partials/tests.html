@@ -9,7 +9,7 @@
     </thead>
     <tbody>
     <tr dir-paginate="test in tests | filter:search:strict  | itemsPerPage: pageSize">
-        <td><a href="/tests/{{test.test_id}}">Edit</a> </td>
+        <td><a href="/tests/{{test.test_id}}"><span class="glyphicon glyphicon-pencil"></span></a> </td>
         <td>{{test.test_id}}</td>
         <td>{{test.test_name}}</td>
     </tr>

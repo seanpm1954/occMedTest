@@ -9,7 +9,7 @@
     </thead>
     <tbody>
     <tr dir-paginate="con in consorts | filter:search:strict  | itemsPerPage: pageSize">
-        <td><a href="/consorts/{{con.client_id}}">Edit</a> </td>
+        <td><a href="/consorts/{{con.client_id}}"><span class="glyphicon glyphicon-pencil"></span></a> </td>
         <td>{{con.consort_id}}</td>
         <td>{{con.consort_name}}</td>
     </tr>

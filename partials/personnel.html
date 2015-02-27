@@ -10,7 +10,7 @@
     </thead>
     <tbody>
     <tr dir-paginate="person in personnel | filter:search  | itemsPerPage: pageSize">
-        <td><a href="/personnel/{{person.personnel_id}}">Edit</a> </td>
+        <td><a href="/personnel/{{person.personnel_id}}"><span class="glyphicon glyphicon-pencil"></span></a> </td>
         <td>{{person.first_name}}</td>
         <td>{{person.last_name}}</td>
     </tr>

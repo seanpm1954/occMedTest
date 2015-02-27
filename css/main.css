@@ -110,6 +110,9 @@ footer{
     clear: both;
 }
 
+#addItem{
+    margin-top: -40px;
+}
 
 /* layout styling */
 

@@ -1,7 +1,8 @@
 var myApp = angular.module('myApp',[
     'ngRoute',
     'ngCookies',
-    'angularUtils.directives.dirPagination'
+    'angularUtils.directives.dirPagination',
+    'ui.bootstrap'
 ]);
 
 
@@ -58,18 +59,64 @@ myApp.config(['$routeProvider', function($routeProvider){
         });
     });
 
-myApp.controller('UsersCtrl', function($scope, $http, $location){
+myApp.controller('UsersCtrl', function($scope, $http, $location, createEditSvc, $modal){
     $scope.currentPage = 1;
     $scope.pageSize = 23;
+
     $http.get('api/users').success(function(data) {
         $scope.users = data;
     });
+
     $scope.getUsers = function(){
         $location.path('/users');
-    }
+    };
 
+    //for user add/edit modal
+    $http.get('api/clients').success(function(data) {
+        $scope.clients = data;
+    });
+    /////
+
+    ///  modal to add user
+
+    $scope.open = function (size) {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'partials/modal.html',
+            controller: 'ModalInstanceCtrl',
+            size: size,
+            resolve: {
+                clients: function () {
+                    return $scope.clients;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+            // save to user
+            // $scope.selected.clients.client_id
+        });
+    };
 
 });// end users ctrl
+
+myApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, clients) {
+
+    $scope.clients = clients;
+    $scope.selected = {
+        clients: $scope.clients[0]
+    };
+
+    $scope.ok = function () {
+        $modalInstance.close($scope.selected.clients);
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+});
+
 
 myApp.controller('ClientsCtrl', function($scope, $http, $location){
     $scope.currentPage = 1;
