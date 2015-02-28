@@ -7,6 +7,7 @@ $app = new Slim();
 
 $app->get('/users', 'getUsers');
 $app->get('/users/:id', 'getUser');
+$app->post('/addUser', 'addUser');
 $app->post('/users/:username/:password', 'getLoginUser');
 $app->get('/clients', 'getClients');
 $app->get('/personnel', 'getPersonnel');
@@ -74,6 +75,28 @@ function getUser($id) {
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
+}
+
+function addUser() {
+  $request = Slim::getInstance()->request();
+  $user = json_decode($request->getBody());
+  $sql = "INSERT INTO users (username, password, first_name, last_name, client_id, access_id) VALUES (:username, :password, :first_name, :last_name, :client_id, :access_id)";
+  try {
+    $db = getConnection();
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam("username", $user->username);
+    $stmt->bindParam("password", $user->password);
+    $stmt->bindParam("first_name", $user->first_name);
+    $stmt->bindParam("last_name", $user->last_name);
+    $stmt->bindParam("client_id", $user->client_id);
+    $stmt->bindParam("access_id", $user->access_id);
+    $stmt->execute();
+    $user->user_id = $db->lastInsertId();
+    $db = null;
+    echo json_encode($user);
+  } catch(PDOException $e) {
+    echo '{"error":{"text":'. $e->getMessage() .'}}';
+  }
 }
 
 function getClients() {

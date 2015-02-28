@@ -97,6 +97,9 @@ myApp.controller('UsersCtrl', function($scope, $http, $location, createEditSvc, 
                 },
                 user: function () {
                     return $scope.user;
+                },
+                users: function () {
+                    return $scope.users;
                 }
 
             }
@@ -109,22 +112,32 @@ myApp.controller('UsersCtrl', function($scope, $http, $location, createEditSvc, 
 
 });// end users ctrl
 
-myApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, clients, access, user) {
+myApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, clients, access, user, users) {
 
     $scope.clients = clients;
     $scope.access = access;
     $scope.user = user;
+    $scope.users = users;
     $scope.selected = {
         clients: $scope.clients[0],
         access: $scope.access[0]
     };
 
     $scope.ok = function () {
-    // save to user
-        // $scope.selected.clients.client_id $scope.selected.access.access_id
-        //$scope.selected.username $scope.selected.firstname $scope.selected.lastname
-        console.log("clientID: " + $scope.selected.clients.client_id + " accessID: " + $scope.selected.access.access_id + " userID: " + $scope.selected.username + " first: " + $scope.selected.firstname + " last: " + $scope.selected.lastname);
-        $modalInstance.close();
+
+        // check for username
+        for(i = 0; i <$scope.users.length; i++) {
+            if ($scope.users[i].username === $scope.selected.username) {
+                alert($scope.users[i].username + " is in use");
+                return;
+            }
+        }
+                console.log("clientID: " + $scope.selected.clients.client_id + " accessID: " + $scope.selected.access.access_id + " userID: " + $scope.selected.username + " first: " + $scope.selected.firstname + " last: " + $scope.selected.lastname);
+        //save to user after validate
+
+                $modalInstance.close();
+
+
     };
 
     $scope.cancel = function () {

@@ -2,31 +2,34 @@
         <div class="modal-header">
             <h3 class="modal-title">Add new user</h3>
         </div>
+
         <div class="modal-body">
-            <label>First name</label>
-            <input type="text" ng-model="selected.firstname" />
-            <div>
+            <form name="myForm" novalidate>
+                <label>First name</label>
+            <input type="text" ng-model="selected.firstname"/>
+
                 <label>Last name</label>
-                <input type="text" ng-model="selected.lastname" />
-                <div>
+                <input type="text" ng-model="selected.lastname"/>
+
             <label>User name</label>
-            <input type="text" ng-model="selected.username" />
-            <div>
+            <input type="text" ng-model="selected.username" value="{{selected.lastname}}"/>
+
                 <select ng-model="selected.clients" ng-options="client.client_name for client in clients track by client.client_id">
                 </select>
-            </div>
 
-            <div>
+
+
                 <select ng-model="selected.access" ng-options="acc.access_name for acc in access track by acc.access_id">
                 </select>
-            </div>
-            </div>
+
+
 
         <div class="modal-footer">
             <button class="btn btn-primary" ng-click="ok()">OK</button>
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
+            </form>
 
+        </div>
 
-    <div ng-show="selected"> {{ selected.client_name }} id: {{selected.client_id}}</div>
 </div>
